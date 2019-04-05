@@ -1,5 +1,7 @@
 = Go Password Masker
 
+image:https://travis-ci.org/noamt/password-masker.svg?branch=master["Build Status", link="https://travis-ci.org/noamt/password-masker"]
+
 A library that helps you mask passwords within strings.
 
 It identifies common password patterns such as:
