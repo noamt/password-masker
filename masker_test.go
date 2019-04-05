@@ -35,6 +35,52 @@ password:
 	}
 }
 
+func TestMaskMultilineWithFluff(t *testing.T) {
+	got := masker.Mask(`
+some: values
+
+password:
+	abcdef123456789
+
+more:
+    values
+`)
+
+	expected := `
+some: values
+
+password:
+	****
+
+more:
+    values
+`
+	if expected != got {
+		t.Errorf("Got '%s'; want '%s'", got, expected)
+	}
+}
+
+func TestMaskMultilineWithMultipleOccurrences(t *testing.T) {
+	got := masker.Mask(`
+password:
+	abcdef123456789
+
+password:
+	whynot
+`)
+
+	expected := `
+password:
+	****
+
+password:
+	****
+`
+	if expected != got {
+		t.Errorf("Got '%s'; want '%s'", got, expected)
+	}
+}
+
 func TestMaskColonSpace(t *testing.T) {
 	got := masker.Mask("password: abcdef123456789")
 	if "password: ****" != got {
