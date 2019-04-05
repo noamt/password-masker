@@ -1,0 +1,39 @@
+= Go Password Masker
+
+A library that helps you mask passwords within strings.
+
+It identifies common password patterns such as:
+
+`password: abcdef123456789`
+
+`pass=abcdef123456789`
+
+and
+
+```
+password:
+    abcdef123456789
+```
+
+And replaces them with `\****`:
+
+```
+password:
+    ****
+```
+
+== Usage
+
+To mask a password within a string:
+```
+containsPass := "password: nonofyourbusiness"
+masked := masker.Mask(containsPass)
+println(masked) // password: ****
+```
+
+You can also select your own mask:
+```
+containsPass := "password: nonofyourbusiness"
+masked := masker.Mask(containsPass, "????")
+println(masked) // password: ????
+```
