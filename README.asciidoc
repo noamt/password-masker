@@ -29,13 +29,13 @@ password:
 To mask a password within a string:
 ```
 containsPass := "password: nonofyourbusiness"
-masked := masker.Mask(containsPass)
+masked := mask.Password(containsPass)
 println(masked) // password: ****
 ```
 
 You can also select your own mask:
 ```
 containsPass := "password: nonofyourbusiness"
-masked := masker.Mask(containsPass, "????")
+masked := mask.Password(containsPass, "????")
 println(masked) // password: ????
 ```

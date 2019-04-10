@@ -1,4 +1,4 @@
-package masker_test
+package mask_test
 
 import (
 	"github.com/noamt/password-masker"
@@ -6,22 +6,22 @@ import (
 )
 
 func ExampleMask() {
-	masker.Mask("password: abcdef123456789")
+	mask.Password("password: abcdef123456789")
 }
 
 func ExampleMaskWith() {
-	masker.MaskWith("password: abcdef123456789", "????")
+	mask.PasswordWith("password: abcdef123456789", "????")
 }
 
 func TestMaskColon(t *testing.T) {
-	got := masker.Mask("password:abcdef123456789")
+	got := mask.Password("password:abcdef123456789")
 	if "password:****" != got {
 		t.Errorf("Got '%s'; want 'password:****'", got)
 	}
 }
 
 func TestMaskMultilineColon(t *testing.T) {
-	got := masker.Mask(`
+	got := mask.Password(`
 password:
 	abcdef123456789
 `)
@@ -36,7 +36,7 @@ password:
 }
 
 func TestMaskMultilineWithFluff(t *testing.T) {
-	got := masker.Mask(`
+	got := mask.Password(`
 some: values
 
 password:
@@ -61,7 +61,7 @@ more:
 }
 
 func TestMaskMultilineWithMultipleOccurrences(t *testing.T) {
-	got := masker.Mask(`
+	got := mask.Password(`
 password:
 	abcdef123456789
 
@@ -82,49 +82,49 @@ password:
 }
 
 func TestMaskColonSpace(t *testing.T) {
-	got := masker.Mask("password: abcdef123456789")
+	got := mask.Password("password: abcdef123456789")
 	if "password: ****" != got {
 		t.Errorf("Got '%s'; want 'password: ****'", got)
 	}
 }
 
 func TestMaskSpaceColonSpace(t *testing.T) {
-	got := masker.Mask("password : abcdef123456789")
+	got := mask.Password("password : abcdef123456789")
 	if "password : ****" != got {
 		t.Errorf("Got '%s'; want 'password : ****'", got)
 	}
 }
 
 func TestMaskEqual(t *testing.T) {
-	got := masker.Mask("password=abcdef123456789")
+	got := mask.Password("password=abcdef123456789")
 	if "password=****" != got {
 		t.Errorf("Got '%s'; want 'password=****'", got)
 	}
 }
 
 func TestMaskEqualSpace(t *testing.T) {
-	got := masker.Mask("password= abcdef123456789")
+	got := mask.Password("password= abcdef123456789")
 	if "password= ****" != got {
 		t.Errorf("Got '%s'; want 'password= ****'", got)
 	}
 }
 
 func TestMaskSpaceEqualSpace(t *testing.T) {
-	got := masker.Mask("password = abcdef123456789")
+	got := mask.Password("password = abcdef123456789")
 	if "password = ****" != got {
 		t.Errorf("Got '%s'; want 'password = ****'", got)
 	}
 }
 
 func TestMaskWith(t *testing.T) {
-	got := masker.MaskWith("password: abcdef123456789", "????")
+	got := mask.PasswordWith("password: abcdef123456789", "????")
 	if "password: ????" != got {
 		t.Errorf("Got '%s'; want 'password: ????'", got)
 	}
 }
 
 func TestMaskPass(t *testing.T) {
-	got := masker.Mask("pass: abcdef123456789")
+	got := mask.Password("pass: abcdef123456789")
 	if "pass: ****" != got {
 		t.Errorf("Got '%s'; want 'pass: ****'", got)
 	}
